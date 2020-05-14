@@ -12,7 +12,6 @@ public class Transition {
         this.stringsReconnus = new ArrayList<>();
     }
 
-
     public void ajouterStringReconnue(String... strings) {
         for (String string : strings) {
             this.stringsReconnus.add(string);
@@ -29,16 +28,8 @@ public class Transition {
         }
     }
 
-    public Etat getEtatDepart() {
-        return this.etatDepart;
-    }
-
     public Etat getEtatFin() {
         return this.etatFin;
-    }
-
-    public ArrayList<String> getCaracteresReconnus() {
-        return this.stringsReconnus;
     }
 
     @Override

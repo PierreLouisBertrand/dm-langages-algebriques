@@ -25,25 +25,15 @@ public class Automate {
         boolean elementReconnu;
 
         for (String caractere : listeCaracteres) { // on boucle sur la liste des caractères du mot
-            // System.out.print("\nAnalyse de ");
-            // System.out.println(caractere);
             elementReconnu = false; // pour l'instant, l'élément n'est pas reconnu
             for (Transition transition : etatActuel.getListeTransitions()) { // on boucle sur les différentes transition qui "partent" de l'état actuel
                 if (transition.isElementAccepte(caractere)) { // Dans le cas où la transition reconnait l'élément actuel...
                     elementReconnu = true; // on note que l'élément est reconnu
-                    // System.out.print("Le caractère est reconnu par la transition ");
-                    // System.out.println(transition); 
                     etatActuel = transition.getEtatFin(); // on change l'état actuel à l'état relié par la transition
-                    // System.out.print("L'état actuel est désormais l'état ");
-                    // System.out.println(etatActuel);
                     break; // et on stoppe la boucle pour éviter de tester les autres transitions
                 }
             }
             if (!elementReconnu) { // après avoir testé les transitions, si aucune ne reconnaît l'élement actuel...
-                // System.out.print("Les transitions de l'état actuel (état ");
-                // System.out.print(etatActuel.toString());
-                // System.out.print(") ne reconnaissent pas le caractere ");
-                // System.out.println(caractere);
                 return false; // ...on retourne false car le mot n'est pas reconnu par l'automate
             }
         }

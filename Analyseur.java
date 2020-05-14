@@ -39,10 +39,10 @@ public class Analyseur {
     // Méthode qui initialise l'automate qui reconnaît les entiers valides
     private void initialiserAutomateEntiers() {
         // États
-        Etat etatAEntiers = new Etat("A", true, false);
-        Etat etatBEntiers = new Etat("B", false, true);
-        Etat etatCEntiers = new Etat("C", false, false);
-        Etat etatDEntiers = new Etat("D", false, true);
+        Etat etatAEntiers = new Etat("A", false);
+        Etat etatBEntiers = new Etat("B", true);
+        Etat etatCEntiers = new Etat("C", false);
+        Etat etatDEntiers = new Etat("D", true);
 
         // Transitions + ajout de ce qu'ils reconnaissent
         Transition transitionABEntiers = new Transition(etatAEntiers, etatBEntiers);
@@ -72,8 +72,8 @@ public class Analyseur {
     // Méthode qui initialise l'automate qui reconnaît les identificateurs valides
     private void initialiserAutomateIdentificateurs() {
         // États
-        Etat etatAIdentificateurs = new Etat("A", true, false);
-        Etat etatBIdentificateurs = new Etat("B", false, true);
+        Etat etatAIdentificateurs = new Etat("A", false);
+        Etat etatBIdentificateurs = new Etat("B", true);
 
         // Transitions + ajout de ce qu'ils reconnaissent
         Transition transitionABIdentificateurs = new Transition(etatAIdentificateurs, etatBIdentificateurs);
@@ -102,10 +102,8 @@ public class Analyseur {
     }
 
     // Méthode qui prend en paramètre le chemin d'un fichier et retourne le contenu
-    // de ce fichier sous la forme d'un String d'une ligne avec les identificateurs remplacés par "ident"
-    // Les différentes lignes du fichier originel seront séparées d'un espace
-    // (pour éviter de coller l'élément de la fin d'une ligne
-    // avec le premier élément de la ligne suivante)
+    // de ce fichier sous la forme d'un String d'une ligne avec les identificateurs remplacés par "ident",
+    // les entiers remplacés par "entier" et les espaces inutiles supprimés
     public String stringifierProgramme(String cheminFichier) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
@@ -162,8 +160,9 @@ public class Analyseur {
         }
 
         String programmeEspaces = res.toString();
-        
-        String resultat = programmeEspaces.replaceAll(" ; ", ";"); // Suppression des espaces autour des points-virgules qui sont inutiles
+
+        // Suppression des espaces autour des points-virgules qui sont inutiles
+        String resultat = programmeEspaces.replaceAll(" ; ", ";");
 
         return resultat;
     }
