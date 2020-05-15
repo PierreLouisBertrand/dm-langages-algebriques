@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Analyseur {
+public class AnalyseALG01 {
     
     private List<String> listeMotsCles;
     private Automate automateEntiers;
     private Automate automateIdentificateurs;
 
-    public Analyseur() {
+    public AnalyseALG01() {
         this.listeMotsCles = Arrays.asList(
             "program",
             "begin",
@@ -104,22 +104,16 @@ public class Analyseur {
     // Méthode qui prend en paramètre le chemin d'un fichier et retourne le contenu
     // de ce fichier sous la forme d'un String d'une ligne avec les identificateurs remplacés par "ident",
     // les entiers remplacés par "entier" et les espaces inutiles supprimés
-    public String stringifierProgramme(String cheminFichier) {
+    public String stringifierProgramme(File fichierALG01) throws FileNotFoundException {
         StringBuilder stringBuilder = new StringBuilder();
-        try {
-            File fichierALG01 = new File(cheminFichier);
-            Scanner lecteurFichier = new Scanner(fichierALG01);
-            while (lecteurFichier.hasNextLine()) {
-                String ligne = lecteurFichier.nextLine();
-                stringBuilder.append(ligne);
-                stringBuilder.append(" ");
-            }
-            lecteurFichier.close();
+        Scanner lecteurFichier = new Scanner(fichierALG01);
+        while (lecteurFichier.hasNextLine()) {
+            String ligne = lecteurFichier.nextLine();
+            stringBuilder.append(ligne);
+            stringBuilder.append(" ");
         }
-        catch (FileNotFoundException e) {
-            System.out.println("Le fichier spécifié n'a pas été trouvé");
-            e.printStackTrace();
-        }
+        lecteurFichier.close();
+
         String programme = stringBuilder.toString();
 
         List<String> listeElementsNonNettoyee = Arrays.asList(programme.split(" "));

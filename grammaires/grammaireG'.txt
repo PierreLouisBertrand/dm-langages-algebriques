@@ -1,0 +1,28 @@
+S -> program ident begin LI end.
+LI -> I LI'
+LI' -> ; I | ε
+I -> Affectation | While | For | If | break
+Affectation -> ident <- Affectation'
+Affectation' -> Expression | ValBool
+While -> while BExpression do LI end
+For -> for ident from Val to Val do LI end
+If -> if BExpression then LI else LI end
+ValBool -> true | false
+BExpression -> A BExpression'
+BExpression' -> or A BExpression' | ε
+A -> C B
+B -> and C B | ε
+C -> not C | D
+D -> ValBool | Condition
+Expression -> AExpression Expression'
+Expression' -> OpNonPrioritaire AExpression Expression' | ε
+AExpression -> EExpression AExpression'
+AExpression' -> OpPrioritaire EExpression AExpression' | ε
+EExpression -> VarNum | ( Expression )
+OpPrioritaire -> * | /
+OpNonPrioritaire -> + | -
+VarNum -> ident VarNum' | entier
+VarNum' -> [ Expression ] | ε
+Valeur -> ident | entier
+Condition -> Expression OpRel Expression
+OpRel -> <= | < | > | >= | = | ! =
